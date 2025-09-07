@@ -33,7 +33,7 @@ const OnceUponTimeLanding = () => {
           <div className="bg-white/10 backdrop-blur-lg rounded-3xl shadow-2xl p-8 sm:p-12 lg:p-16 border border-white/30 glass-card gpu-accelerated">
             {/* Title */}
             <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-serif font-bold mb-6 sm:mb-8 leading-tight drop-shadow-lg will-change-transform">
-              <span className="text-white animate-fade-in-bright">Once</span>{' '}
+              <span className="text-white animate-fade-in-bright">Once</span>{'Upon a Time'}{' '}
               <span className="italic text-transparent bg-gradient-to-r from-orange-300 via-yellow-400 to-orange-500 bg-clip-text animate-pulse-bright animate-fade-in-bright-delay">
                 Upon a Time
               </span>
