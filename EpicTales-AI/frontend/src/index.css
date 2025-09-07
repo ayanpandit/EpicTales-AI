@@ -1,3 +1,179 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Advanced smooth scrolling optimizations */
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 100px;
+  /* Enhanced scrolling for webkit browsers */
+  -webkit-overflow-scrolling: touch;
+  /* Better scroll performance */
+  scrollbar-width: thin;
+  scrollbar-color: rgba(156, 163, 175, 0.5) transparent;
+}
+
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  /* Enhanced scroll smoothness */
+  scroll-behavior: smooth;
+  /* Prevent momentum scrolling issues */
+  -webkit-overflow-scrolling: touch;
+  /* Better text rendering */
+  text-rendering: optimizeSpeed;
+  /* Reduce layout shifts */
+  font-display: swap;
+}
+
+/* Advanced performance optimizations for animations and transforms */
+.will-change-transform {
+  will-change: transform;
+}
+
+.will-change-scroll {
+  will-change: scroll-position;
+}
+
+.will-change-auto {
+  will-change: auto;
+}
+
+/* Enhanced GPU acceleration for butter smooth performance */
+.gpu-accelerated {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+  /* Force hardware acceleration */
+  -webkit-transform: translateZ(0);
+  -webkit-backface-visibility: hidden;
+  -webkit-perspective: 1000px;
+}
+
+/* Ultra smooth transitions with optimized easing */
+.smooth-transition {
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  /* Better easing for smoother feel */
+}
+
+.ultra-smooth-transition {
+  transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+  /* Even smoother easing */
+}
+
+/* Optimize backdrop filters with hardware acceleration */
+.backdrop-blur-optimized {
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  will-change: backdrop-filter;
+  /* Force GPU acceleration for backdrop filter */
+  transform: translateZ(0);
+}
+
+/* Smooth scrolling container optimization */
+.smooth-scroll-container {
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  /* Better scroll performance */
+  overscroll-behavior-y: contain;
+  /* Prevent scroll chaining */
+  scroll-snap-type: y proximity;
+  /* Optional: smooth snap points */
+}
+
+/* Performance optimization for large content areas */
+.content-performance {
+  /* Contain layout and paint for better performance */
+  contain: layout style paint;
+  /* Better rendering performance */
+  transform: translateZ(0);
+  /* Optimize repaints */
+  will-change: transform;
+}
+
+/* Smooth hover effects without lag */
+.smooth-hover {
+  transition: transform 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              box-shadow 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              background-color 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  will-change: transform, box-shadow, background-color;
+}
+
+.smooth-hover:hover {
+  transform: translateY(-2px) translateZ(0);
+}
+
+/* Optimized animation performance */
+@keyframes smooth-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(20px) translateZ(0);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) translateZ(0);
+  }
+}
+
+.smooth-fade-in {
+  animation: smooth-fade-in 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  will-change: opacity, transform;
+}
+
+/* Intersection observer optimization */
+.observe-intersection {
+  /* Better performance for elements that come into view */
+  will-change: auto;
+  transform: translateZ(0);
+}
+
+/* Custom scrollbar for better visual experience */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(156, 163, 175, 0.5);
+  border-radius: 10px;
+  transition: background-color 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(156, 163, 175, 0.7);
+}
+
+/* Mobile scrolling optimizations */
+@media (max-width: 768px) {
+  body {
+    /* Better mobile scrolling */
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-y: contain;
+  }
+  
+  /* Reduce motion for better mobile performance */
+  .reduce-motion {
+    transition: none !important;
+    animation: none !important;
+  }
+}
+
+/* Reduce motion for accessibility and performance */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

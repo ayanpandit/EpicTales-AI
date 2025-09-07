@@ -30,7 +30,7 @@ const HowItWorks = () => {
   ];
 
   return (
-    <section className="w-full bg-gray-100 py-16 px-4 sm:px-6 lg:px-8">
+    <section className="w-full py-16 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         {/* Header Section */}
         <div className="text-center mb-20">
@@ -42,14 +42,14 @@ const HowItWorks = () => {
           </div>
           
           {/* Main Title */}
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-gray-900 mb-8 leading-tight">
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-orange-500 mb-8 leading-tight">
             <span className="font-['Brush_Script_MT',_cursive] italic">
               Crafting Your Story in Three Simple Steps
             </span>
           </h1>
           
           {/* Description */}
-          <p className="text-lg sm:text-xl text-gray-600 max-w-4xl mx-auto leading-relaxed font-medium">
+          <p className="text-lg sm:text-xl text-gray-200 max-w-4xl mx-auto leading-relaxed font-medium">
             Unleash your creativity and watch your ideas transform into captivating stories with our easy-to-use platform. It's as simple as one, two, three!
           </p>
         </div>
@@ -95,12 +95,12 @@ const HowItWorks = () => {
               {/* Content */}
               <div className="space-y-4">
                 {/* Title */}
-                <h3 className="text-2xl sm:text-3xl lg:text-4xl font-black text-gray-900 leading-tight">
+                <h3 className="text-2xl sm:text-3xl lg:text-4xl font-black text-white leading-tight">
                   {step.title}
                 </h3>
                 
                 {/* Description */}
-                <p className="text-base sm:text-lg text-gray-600 leading-relaxed max-w-sm mx-auto font-medium">
+                <p className="text-base sm:text-lg text-gray-200 leading-relaxed max-w-sm mx-auto font-medium">
                   {step.description}
                 </p>
               </div>
@@ -115,13 +115,6 @@ const HowItWorks = () => {
               )}
             </div>
           ))}
-        </div>
-
-        {/* Bottom CTA */}
-        <div className="text-center mt-20">
-          <button className="bg-gradient-to-r from-orange-500 to-red-600 hover:from-orange-600 hover:to-red-700 text-white px-8 py-4 rounded-full font-bold text-lg shadow-xl transition-all duration-300 uppercase tracking-wide hover:shadow-2xl">
-            Start Creating Your Story
-          </button>
         </div>
       </div>
 

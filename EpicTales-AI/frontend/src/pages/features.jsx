@@ -1,9 +1,13 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import storyWritingImg from '../assets/story-writing-feature.jpg';
 import illustrationsImg from '../assets/illustrations-feature.jpg';
 import customizableCharactersImg from '../assets/customizable-characters-feature.jpg';
 
 const FeaturesSection = () => {
+  const [isVisible, setIsVisible] = useState(false);
+  const [visibleCards, setVisibleCards] = useState(new Set());
+  const sectionRef = useRef(null);
+
   const features = [
     {
       id: 1,
@@ -28,44 +32,90 @@ const FeaturesSection = () => {
     }
   ];
 
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.target === sectionRef.current && entry.isIntersecting) {
+            setIsVisible(true);
+          }
+          
+          // Handle individual card animations
+          if (entry.target.dataset.cardId && entry.isIntersecting) {
+            const cardId = parseInt(entry.target.dataset.cardId);
+            setVisibleCards(prev => new Set([...prev, cardId]));
+          }
+        });
+      },
+      {
+        threshold: 0.1,
+        rootMargin: '50px'
+      }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    // Observe all cards
+    const cards = document.querySelectorAll('[data-card-id]');
+    cards.forEach(card => observer.observe(card));
+
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
+
   return (
-    <section className="w-full bg-gray-100 py-16 px-4 sm:px-6 lg:px-8">
+    <section 
+      ref={sectionRef}
+      className="w-full py-16 px-4 sm:px-6 lg:px-8 gpu-accelerated"
+    >
       <div className="max-w-7xl mx-auto">
         {/* Header */}
-        <div className="text-center mb-20">
+        <div className={`text-center mb-20 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
           {/* Badge */}
           <div className="inline-block mb-6">
-            <span className="bg-orange-100 text-orange-600 px-6 py-2 rounded-full text-sm font-medium uppercase tracking-wider">
+            <span className="bg-orange-100 text-orange-600 px-6 py-2 rounded-full text-sm font-medium uppercase tracking-wider smooth-transition">
               FEATURES
             </span>
           </div>
           
-          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black text-gray-900 mb-8 leading-tight">
+          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black text-orange-500 mb-8 leading-tight">
             <span className="font-['Brush_Script_MT',_cursive] italic">
               Magical Features to Spark Creativity
             </span>
           </h2>
-          <p className="text-lg sm:text-xl text-gray-600 max-w-4xl mx-auto leading-relaxed font-medium">
+          <p className="text-lg sm:text-xl text-gray-200 max-w-4xl mx-auto leading-relaxed font-medium">
             Explore the enchanting features of our storybook app, designed to spark creativity and bring stories to life.
           </p>
         </div>
 
         {/* Features Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12">
-          {features.map((feature) => (
+          {features.map((feature, index) => (
             <div 
               key={feature.id}
-              className="text-center group"
+              data-card-id={feature.id}
+              className={`text-center group h-full will-change-transform transition-all duration-700 ease-out ${
+                visibleCards.has(feature.id) 
+                  ? 'opacity-100 translate-y-0' 
+                  : 'opacity-0 translate-y-8'
+              }`}
+              style={{
+                transitionDelay: `${index * 200}ms`
+              }}
             >
               {/* Feature Card */}
-              <div className="bg-white rounded-2xl sm:rounded-3xl p-6 sm:p-8 shadow-2xl border border-gray-200">
+              <div className="bg-white rounded-2xl sm:rounded-3xl p-6 sm:p-8 shadow-2xl border border-gray-200 h-full flex flex-col gpu-accelerated hover:scale-105 smooth-transition hover:shadow-3xl">
                 {/* Image Container */}
-                <div className="relative mb-8">
-                  <div className="w-48 h-48 sm:w-56 sm:h-56 lg:w-64 lg:h-64 mx-auto rounded-full overflow-hidden shadow-2xl transition-transform duration-300 ease-out">
+                <div className="relative mb-8 flex-shrink-0">
+                  <div className="w-32 h-32 sm:w-40 sm:h-40 lg:w-48 lg:h-48 mx-auto rounded-full overflow-hidden shadow-2xl transition-transform duration-500 ease-out group-hover:scale-110 will-change-transform">
                     <img 
                       src={feature.image}
                       alt={feature.altText}
-                      className="w-full h-full object-cover"
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                      loading="lazy"
                       onError={(e) => {
                         // Fallback based on feature type
                         if (feature.id === 1) {
@@ -80,32 +130,25 @@ const FeaturesSection = () => {
                   </div>
                   
                   {/* Feature Number Badge */}
-                  <div className="absolute -bottom-4 left-1/2 transform -translate-x-1/2">
-                    <div className="w-12 h-12 bg-orange-500 text-white rounded-full flex items-center justify-center font-bold text-xl shadow-lg border-4 border-white">
+                  <div className="absolute -bottom-4 left-1/2 transform -translate-x-1/2 will-change-transform">
+                    <div className="w-12 h-12 bg-orange-500 text-white rounded-full flex items-center justify-center font-bold text-xl shadow-lg border-4 border-white transition-transform duration-300 group-hover:scale-110">
                       {feature.id}
                     </div>
                   </div>
                 </div>
 
                 {/* Content */}
-                <div className="space-y-4">
-                  <h3 className="text-2xl sm:text-3xl lg:text-4xl font-black text-gray-900 leading-tight">
+                <div className="space-y-4 flex-grow flex flex-col justify-center">
+                  <h3 className="text-xl sm:text-2xl lg:text-3xl font-black text-gray-900 leading-tight">
                     {feature.title}
                   </h3>
-                  <p className="text-base sm:text-lg text-gray-600 leading-relaxed max-w-sm mx-auto font-medium">
+                  <p className="text-sm sm:text-base text-gray-600 leading-relaxed font-medium">
                     {feature.description}
                   </p>
                 </div>
               </div>
             </div>
           ))}
-        </div>
-
-        {/* Bottom CTA */}
-        <div className="text-center mt-20">
-          <button className="bg-gradient-to-r from-orange-500 to-red-600 hover:from-orange-600 hover:to-red-700 text-white px-8 py-4 rounded-full font-bold text-lg shadow-xl transition-all duration-300 uppercase tracking-wide hover:shadow-2xl">
-            Explore All Features
-          </button>
         </div>
       </div>
 

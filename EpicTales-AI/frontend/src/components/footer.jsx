@@ -7,15 +7,15 @@ const YourStoryBegins = () => {
   return (
     <section className="relative w-full h-screen flex flex-col">
       {/* Top Section with Text */}
-      <div className="flex-1 bg-gray-50 flex items-center justify-center px-4 sm:px-6 lg:px-8">
+      <div className="flex-1 flex items-center justify-center px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-4xl mx-auto">
           {/* Main Title */}
-          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold text-gray-800 mb-4 sm:mb-6 leading-tight tracking-tight">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold text-white mb-4 sm:mb-6 leading-tight tracking-tight">
             Your Story Begins...
           </h1>
           
           {/* Subtitle */}
-          <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-gray-500 font-light tracking-wide">
+          <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-gray-300 font-light tracking-wide">
             The pages are waiting.
           </p>
         </div>

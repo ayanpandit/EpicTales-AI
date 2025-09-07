@@ -1,0 +1,34 @@
+{
+  "name": "epictales-ai-frontend",
+  "version": "1.0.0",
+  "description": "EpicTales AI - Magical Story Generation Frontend",
+  "homepage": "https://epictales-ai.netlify.app",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ayanpandit/EpicTales-AI.git"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "keywords": [
+    "ai",
+    "storytelling",
+    "children",
+    "education",
+    "react",
+    "vite"
+  ]
+}

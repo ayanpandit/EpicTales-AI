@@ -53,7 +53,7 @@ const FamilyTestimonials = () => {
   };
 
   return (
-    <div className="w-full bg-gray-100 py-16 px-4 sm:px-6 lg:px-8">
+    <div className="w-full py-16 px-4 sm:px-6 lg:px-8">
       {/* Header Section */}
       <div className="max-w-7xl mx-auto mb-20">
         {/* Badge */}
@@ -65,23 +65,24 @@ const FamilyTestimonials = () => {
         
         {/* Hero Image */}
         <div className="flex justify-center mb-8">
-          <div className="relative">
+          <div className="relative group">
             <img 
               src={readingFamilyImg} 
               alt="Family reading together"
-              className="w-full max-w-md h-48 sm:h-56 lg:h-64 object-cover rounded-2xl shadow-2xl"
+              className="w-full max-w-2xl h-64 sm:h-80 lg:h-96 xl:h-[28rem] object-cover rounded-3xl shadow-2xl transform transition-all duration-500 group-hover:scale-105 group-hover:shadow-3xl border-4 border-orange-200/50"
             />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent rounded-3xl pointer-events-none"></div>
           </div>
         </div>
         
         {/* Title and Description */}
         <div className="text-center">
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-gray-900 mb-8 leading-tight">
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-orange-500 mb-8 leading-tight">
             <span className="font-['Brush_Script_MT',_cursive] italic">
               What Our Families Say
             </span>
           </h1>
-          <p className="text-lg sm:text-xl text-gray-600 max-w-4xl mx-auto leading-relaxed font-medium">
+          <p className="text-lg sm:text-xl text-gray-200 max-w-4xl mx-auto leading-relaxed font-medium">
             Discover why families love our magical storybooks. Read testimonials from parents and children who have experienced the joy of reading with us.
           </p>
         </div>
@@ -144,13 +145,6 @@ const FamilyTestimonials = () => {
               </div>
             </div>
           ))}
-        </div>
-
-        {/* Bottom CTA */}
-        <div className="text-center mt-20">
-          <button className="bg-gradient-to-r from-orange-500 to-red-600 hover:from-orange-600 hover:to-red-700 text-white px-8 py-4 rounded-full font-bold text-lg shadow-xl transition-all duration-300 uppercase tracking-wide hover:shadow-2xl">
-            Share Your Story
-          </button>
         </div>
       </div>
 
