@@ -50,13 +50,24 @@ cors_origins = os.getenv('CORS_ORIGINS', 'http://localhost:3000,http://localhost
 CORS(app, origins=cors_origins, methods=["GET", "POST"], allow_headers=["Content-Type"])
 
 # Optimized logging
+from logging.handlers import RotatingFileHandler
+
+# Create handlers
+console_handler = logging.StreamHandler(sys.stdout)
+console_handler.setLevel(logging.INFO)
+
+# Use RotatingFileHandler for file logging (only in production)
+if os.getenv('FLASK_ENV') == 'production':
+    file_handler = RotatingFileHandler('app.log', maxBytes=10485760, backupCount=5)
+    file_handler.setLevel(logging.INFO)
+    handlers = [console_handler, file_handler]
+else:
+    handlers = [console_handler]
+
 logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
-    handlers=[
-        logging.StreamHandler(sys.stdout),
-        logging.FileHandler('app.log', maxBytes=10485760, backupCount=5)  # 10MB log files
-    ]
+    handlers=handlers
 )
 logger = logging.getLogger(__name__)
 
