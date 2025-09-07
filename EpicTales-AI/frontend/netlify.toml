@@ -6,7 +6,7 @@
 [build.environment]
   NODE_VERSION = "18"
   NPM_VERSION = "9"
-  VITE_API_BASE_URL = "https://your-backend-app.onrender.com"
+  VITE_API_BASE_URL = "https://epictales-ai.onrender.com"
 
 [context.production]
   command = "npm run build:static"
