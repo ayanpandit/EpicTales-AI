@@ -731,6 +731,22 @@ def serve_static(filename):
     except Exception:
         return jsonify({"error": "File not found"}), 404
 
+@app.route('/', methods=['GET'])
+def root():
+    """Root endpoint for health checks"""
+    return jsonify({
+        "status": "EpicTales AI Backend Running",
+        "message": "⚡ Real Image Generation Backend Ready!",
+        "health": "ok",
+        "endpoints": {
+            "health": "/health",
+            "test": "/test", 
+            "generate": "/generate",
+            "download_pdf": "/download-pdf",
+            "stats": "/stats"
+        }
+    })
+
 @app.route('/health', methods=['GET'])
 def health_check():
     """Health check"""
@@ -1217,10 +1233,10 @@ if __name__ == "__main__":
     initial_memory = get_memory_usage()
     print(f"💾 Initial memory usage: {initial_memory:.2f} MB")
     
-    # Get configuration from environment variables
+    # Get configuration from environment variables - Render will set PORT
     debug_mode = os.getenv('FLASK_DEBUG', 'False').lower() == 'true'
     host = os.getenv('HOST', '0.0.0.0')
-    port = int(os.getenv('PORT', '5000'))
+    port = int(os.getenv('PORT', '10000'))  # Render overrides this
     
     print(f"🌐 Server starting on {host}:{port}")
     print(f"🐛 Debug mode: {debug_mode}")
@@ -1231,9 +1247,11 @@ if __name__ == "__main__":
     print(f"📊 Process Monitoring: ✅ Active")
     
     try:
-        # Skip Flask dev server when running with Gunicorn in production
-        if __name__ == "__main__":
+        # Only run Flask dev server in development, Gunicorn handles production
+        if os.getenv('FLASK_ENV') != 'production':
             app.run(debug=debug_mode, host=host, port=port, threaded=True)
+        else:
+            print("🚀 Production mode - Gunicorn will handle the server")
     except KeyboardInterrupt:
         print("\n🛑 Shutting down server...")
         periodic_cleanup()
