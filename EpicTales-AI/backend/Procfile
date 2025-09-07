@@ -1,0 +1,2 @@
+# Procfile for deployment platforms (Heroku, Railway, etc.)
+web: gunicorn --config gunicorn.conf.py app:app

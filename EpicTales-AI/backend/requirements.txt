@@ -1,0 +1,31 @@
+# Production-Optimized EpicTales AI Backend
+# Memory efficient dependencies for hosting platforms
+
+# Core Flask Framework
+Flask==3.0.0
+flask-cors==4.0.0
+Werkzeug==3.0.1
+
+# Environment & Configuration
+python-dotenv==1.0.0
+
+# HTTP & Async
+requests==2.31.0
+
+# Image Processing (Memory optimized)
+Pillow==10.1.0
+
+# PDF Generation
+reportlab==4.0.7
+
+# Memory & Process Monitoring
+psutil==5.9.6
+
+# Production WSGI Server
+gunicorn==21.2.0
+
+# AI/ML (Optional - uncomment if needed)
+# huggingface-hub==0.19.4
+
+# Security & Optimization
+cryptography==41.0.8
