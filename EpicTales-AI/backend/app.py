@@ -1231,7 +1231,9 @@ if __name__ == "__main__":
     print(f"📊 Process Monitoring: ✅ Active")
     
     try:
-        app.run(debug=debug_mode, host=host, port=port, threaded=True)
+        # Skip Flask dev server when running with Gunicorn in production
+        if __name__ == "__main__":
+            app.run(debug=debug_mode, host=host, port=port, threaded=True)
     except KeyboardInterrupt:
         print("\n🛑 Shutting down server...")
         periodic_cleanup()
@@ -1280,3 +1282,8 @@ def stats():
         "static_files": len([f for f in os.listdir('static') if f.endswith(('.png', '.jpg', '.jpeg', '.pdf'))]),
         "uptime_seconds": round(time.time() - process.create_time(), 2)
     })
+
+if __name__ == "__main__":
+    import os
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    os.chdir(script_dir)
