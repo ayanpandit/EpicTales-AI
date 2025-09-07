@@ -1258,21 +1258,6 @@ def after_request(response):
         cleanup_memory()
     return response
 
-# Health check endpoint for monitoring
-@app.route('/health', methods=['GET'])
-def health_check():
-    """Health check endpoint with memory stats"""
-    memory_mb = get_memory_usage()
-    return jsonify({
-        "status": "healthy",
-        "memory_usage_mb": round(memory_mb, 2),
-        "cache_sizes": {
-            "story_cache": len(story_cache),
-            "image_cache": len(image_cache)
-        },
-        "timestamp": time.time()
-    })
-
 # Memory stats endpoint
 @app.route('/stats', methods=['GET'])
 def stats():
